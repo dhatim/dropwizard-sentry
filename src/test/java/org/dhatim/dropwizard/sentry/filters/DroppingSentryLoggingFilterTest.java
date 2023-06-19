@@ -2,8 +2,9 @@ package org.dhatim.dropwizard.sentry.filters;
 
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.spi.FilterReply;
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DroppingSentryLoggingFilterTest {
 

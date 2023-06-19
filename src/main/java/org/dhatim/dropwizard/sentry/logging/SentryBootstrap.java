@@ -1,8 +1,8 @@
 package org.dhatim.dropwizard.sentry.logging;
 
 import ch.qos.logback.classic.Logger;
-import io.dropwizard.logging.filter.ThresholdLevelFilterFactory;
-import io.dropwizard.logging.layout.DropwizardLayoutFactory;
+import io.dropwizard.logging.common.filter.ThresholdLevelFilterFactory;
+import io.dropwizard.logging.common.layout.DropwizardLayoutFactory;
 import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
