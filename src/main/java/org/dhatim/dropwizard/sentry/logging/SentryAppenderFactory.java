@@ -1,23 +1,22 @@
 package org.dhatim.dropwizard.sentry.logging;
 
-import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.filter.Filter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import io.dropwizard.logging.AbstractAppenderFactory;
-import io.dropwizard.logging.async.AsyncAppenderFactory;
-import io.dropwizard.logging.filter.LevelFilterFactory;
-import io.dropwizard.logging.layout.LayoutFactory;
+import io.dropwizard.logging.common.AbstractAppenderFactory;
+import io.dropwizard.logging.common.async.AsyncAppenderFactory;
+import io.dropwizard.logging.common.filter.LevelFilterFactory;
+import io.dropwizard.logging.common.layout.LayoutFactory;
 import io.sentry.Sentry;
 import io.sentry.SentryOptions;
 import io.sentry.logback.SentryAppender;
+import jakarta.validation.constraints.NotNull;
 import org.dhatim.dropwizard.sentry.SentryConfigurator;
 import org.dhatim.dropwizard.sentry.filters.DroppingSentryLoggingFilter;
 
-import javax.validation.constraints.NotNull;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;

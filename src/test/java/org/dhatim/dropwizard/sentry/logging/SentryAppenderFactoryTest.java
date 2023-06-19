@@ -4,17 +4,18 @@ import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
 import io.dropwizard.configuration.ConfigurationException;
-import io.dropwizard.logging.async.AsyncLoggingEventAppenderFactory;
-import io.dropwizard.logging.filter.ThresholdLevelFilterFactory;
-import io.dropwizard.logging.layout.DropwizardLayoutFactory;
+import io.dropwizard.logging.common.async.AsyncLoggingEventAppenderFactory;
+import io.dropwizard.logging.common.filter.ThresholdLevelFilterFactory;
+import io.dropwizard.logging.common.layout.DropwizardLayoutFactory;
 import io.sentry.logback.SentryAppender;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SentryAppenderFactoryTest {
 
@@ -27,15 +28,16 @@ public class SentryAppenderFactoryTest {
     public void hasValidDefaults() throws IOException, ConfigurationException {
         final SentryAppenderFactory factory = new SentryAppenderFactory();
 
-        assertNull("default dsn is unset", factory.dsn);
-        assertNull("default environment is unset", factory.environment);
-        assertNull("default release is unset", factory.release);
-        assertNull("default serverName is unset", factory.serverName);
+        assertNull(factory.dsn, "default dsn is unset");
+        assertNull(factory.environment, "default environment is unset");
+        assertNull(factory.release, "default release is unset");
+        assertNull(factory.serverName, "default serverName is unset");
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void buildSentryAppenderShouldFailWithNullContext() {
-        new SentryAppenderFactory().build(null, "", null, levelFilterFactory, asyncAppenderFactory);
+        assertThrows(NullPointerException.class,
+                () -> new SentryAppenderFactory().build(null, "", null, levelFilterFactory, asyncAppenderFactory));
     }
 
     @Test
