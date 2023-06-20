@@ -1,7 +1,6 @@
 # Dropwizard Sentry
 
 [![Build Status](https://github.com/dhatim/dropwizard-sentry/workflows/build/badge.svg)](https://github.com/dhatim/dropwizard-sentry/actions)
-[![Coverage Status](https://coveralls.io/repos/github/dhatim/dropwizard-sentry/badge.svg?branch=master)](https://coveralls.io/github/dhatim/dropwizard-sentry?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.dhatim/dropwizard-sentry/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.dhatim/dropwizard-sentry)
 [![Javadocs](https://www.javadoc.io/badge/org.dhatim/dropwizard-sentry.svg)](https://www.javadoc.io/doc/org.dhatim/dropwizard-sentry)
 
