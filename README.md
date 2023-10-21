@@ -52,17 +52,18 @@ appenders:
     inAppIncludes: ['com.example','com.foo']
 ```
 
-| Setting | Default | Description | Example Value |
-|---|---|---|---|
-| `threshold` | ALL | The minimum log level to send events to Sentry | `ERROR` |
-| [`dsn`](https://docs.sentry.io/platforms/java/configuration/#setting-the-dsn) |   | Data Source Name - format is `https://{PUBLIC_KEY}:{SECRET_KEY}@sentry.io/{PROJECT_ID}` | `https://foo:bar@sentry.io/12345` |
-| [`environment`](https://docs.sentry.io/platforms/java/configuration/#environment) | [empty] | The environment your application is running in |  `production` |
-| [`tags`](https://docs.sentry.io/platforms/java/configuration/#tags) | [empty] | Tags to be sent with each event | `tag1:value1,tag2,value2` |
-| `configurator` | [empty] | Specify a custom [`SentryConfigurator`](https://github.com/dhatim/dropwizard-sentry/blob/master/src/main/java/org/dhatim/dropwizard/sentry/SentryConfigurator.java) class | `com.example.MySentryConfigurator` |
-| [`release`](https://docs.sentry.io/platforms/java/configuration/#release) | [empty] | The release version of your application | `1.0.0` |
-| [`serverName`](https://docs.sentry.io/platforms/java/configuration/#server-name) | [empty] | Override the server name (rather than looking it up dynamically) | `10.0.0.1` |
-| [`inAppIncludes`](https://docs.sentry.io/platforms/java/configuration/#in-app-includes) | [empty] | List of package prefixes used by application code | `['com.example','com.foo']` |
-| [`inAppExcludes`](https://docs.sentry.io/platforms/java/configuration/#in-app-excludes) | [empty] | List of package prefixes not used by application code | `['com.thirdparty','com.anotherthirdparty']` |
+| Setting | Default | Description                                                                                                                                                               | Example Value                                |
+|---|---|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|
+| `threshold` | ALL | The minimum log level to send events to Sentry                                                                                                                            | `ERROR`                                      |
+| [`dsn`](https://docs.sentry.io/platforms/java/configuration/#setting-the-dsn) |   | Data Source Name - format is `https://{PUBLIC_KEY}:{SECRET_KEY}@sentry.io/{PROJECT_ID}`                                                                                   | `https://foo:bar@sentry.io/12345`            |
+| [`environment`](https://docs.sentry.io/platforms/java/configuration/#environment) | [empty] | The environment your application is running in                                                                                                                            | `production`                                 |
+| [`tags`](https://docs.sentry.io/platforms/java/configuration/#tags) | [empty] | Tags to be sent with each event                                                                                                                                           | `tag1:value1,tag2,value2`                    |
+| `configurator` | [empty] | Specify a custom [`SentryConfigurator`](https://github.com/dhatim/dropwizard-sentry/blob/master/src/main/java/org/dhatim/dropwizard/sentry/SentryConfigurator.java) class | `com.example.MySentryConfigurator`           |
+| [`release`](https://docs.sentry.io/platforms/java/configuration/#release) | [empty] | The release version of your application                                                                                                                                   | `1.0.0`                                      |
+| [`serverName`](https://docs.sentry.io/platforms/java/configuration/#server-name) | [empty] | Override the server name (rather than looking it up dynamically)                                                                                                          | `10.0.0.1`                                   |
+| [`inAppIncludes`](https://docs.sentry.io/platforms/java/configuration/#in-app-includes) | [empty] | List of package prefixes used by application code                                                                                                                         | `['com.example','com.foo']`                  |
+| [`inAppExcludes`](https://docs.sentry.io/platforms/java/configuration/#in-app-excludes) | [empty] | List of package prefixes not used by application code                                                                                                                     | `['com.thirdparty','com.anotherthirdparty']` |
+| `contextTags` | [empty] | context tags names applied as Sentry tags to each event                                                                                                                   | `['contextTag1','contextTag2']`              |
 
 If you need to set configuration properties not listed above, append them to the `dsn` as described [here](https://docs.sentry.io/clients/java/config/#configuration-via-the-dsn).
 
