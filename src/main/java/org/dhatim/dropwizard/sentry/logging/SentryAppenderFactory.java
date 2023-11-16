@@ -54,6 +54,9 @@ public class SentryAppenderFactory extends AbstractAppenderFactory<ILoggingEvent
     @JsonProperty
     public String configurator = null;
 
+    @JsonProperty
+    public List<String> contextTags = null;
+
     @Override
     public Appender<ILoggingEvent> build(LoggerContext context,
                                          String applicationName,
@@ -69,6 +72,7 @@ public class SentryAppenderFactory extends AbstractAppenderFactory<ILoggingEvent
         Optional.ofNullable(serverName).ifPresent(options::setServerName);
         Optional.ofNullable(inAppIncludes).ifPresent(inAppIncludes -> inAppIncludes.forEach(options::addInAppInclude));
         Optional.ofNullable(inAppExcludes).ifPresent(inAppExcludes -> inAppExcludes.forEach(options::addInAppExclude));
+        Optional.ofNullable(contextTags).ifPresent(contextTags -> contextTags.forEach(options::addContextTag));
         Optional.ofNullable(configurator).ifPresent(configurator -> {
             try {
                 Class<?> klass = Class.forName(configurator);

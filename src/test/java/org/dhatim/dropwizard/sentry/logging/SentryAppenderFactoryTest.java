@@ -7,15 +7,20 @@ import io.dropwizard.configuration.ConfigurationException;
 import io.dropwizard.logging.common.async.AsyncLoggingEventAppenderFactory;
 import io.dropwizard.logging.common.filter.ThresholdLevelFilterFactory;
 import io.dropwizard.logging.common.layout.DropwizardLayoutFactory;
+import io.sentry.SentryOptions;
 import io.sentry.logback.SentryAppender;
+import org.dhatim.dropwizard.sentry.SentryConfigurator;
+import org.hamcrest.collection.IsIterableContainingInOrder;
+import org.hamcrest.collection.IsMapContaining;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SentryAppenderFactoryTest {
 
@@ -48,6 +53,44 @@ public class SentryAppenderFactoryTest {
         Appender<ILoggingEvent> appender = factory.build(context, "", layoutFactory, levelFilterFactory, asyncAppenderFactory);
 
         assertThat(appender, instanceOf(SentryAppender.class));
+    }
+
+    @Test
+    void buildSentryAppenderFullConfiguration() {
+        SentryAppenderFactory factory = new SentryAppenderFactory();
+        factory.dsn = "https://user:pass@app.sentry.io/id";
+        factory.environment = "test";
+        factory.tags = Map.of("tag1", "value1");
+        factory.release = "1.0.0";
+        factory.serverName = "10.0.0.1";
+        factory.inAppIncludes = List.of("com.example");
+        factory.inAppExcludes = List.of("com.thirdparty");
+        factory.contextTags = List.of("contextTag1");
+        factory.configurator = CaptureSentryConfigurator.class.getName();
+
+        Appender<ILoggingEvent> appender = factory.build(context, "", layoutFactory, levelFilterFactory, asyncAppenderFactory);
+        assertThat(appender, instanceOf(SentryAppender.class));
+
+        SentryOptions capturedOptions = CaptureSentryConfigurator.capturedOptions;
+        assertNotNull(capturedOptions);
+
+        assertEquals("https://user:pass@app.sentry.io/id", capturedOptions.getDsn());
+        assertEquals("test", capturedOptions.getEnvironment());
+        assertEquals("1.0.0", capturedOptions.getRelease());
+        assertThat(capturedOptions.getContextTags(), IsIterableContainingInOrder.contains("contextTag1"));
+        assertEquals("10.0.0.1", capturedOptions.getServerName());
+        assertThat(capturedOptions.getTags(), IsMapContaining.hasEntry("tag1", "value1"));
+        assertThat(capturedOptions.getInAppIncludes(), IsIterableContainingInOrder.contains("com.example"));
+        assertThat(capturedOptions.getInAppExcludes(), IsIterableContainingInOrder.contains("com.thirdparty"));
+
+    }
+
+    protected static class CaptureSentryConfigurator implements SentryConfigurator {
+        static SentryOptions capturedOptions;
+        @Override
+        public void configure(SentryOptions options) {
+            capturedOptions = options;
+        }
     }
 
 }
