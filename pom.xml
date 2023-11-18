@@ -60,7 +60,7 @@
             <dependency>
                 <groupId>io.dropwizard</groupId>
                 <artifactId>dropwizard-bom</artifactId>
-                <version>4.0.3</version>
+                <version>4.0.4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -80,12 +80,6 @@
             <groupId>io.sentry</groupId>
             <artifactId>sentry-logback</artifactId>
             <version>${sentry.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.9.3</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
